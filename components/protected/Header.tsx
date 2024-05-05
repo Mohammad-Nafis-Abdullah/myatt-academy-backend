@@ -31,7 +31,7 @@ const Header = () => {
         <Box
           display={{
             base: "none",
-            md: "flex",
+            lg: "flex",
           }}
           alignItems={"center"}
           gap={3}
@@ -42,7 +42,7 @@ const Header = () => {
         <Box
           display={{
             base: "inline-block",
-            md: "none",
+            lg: "none",
           }}
         >
           <MobileMenu />

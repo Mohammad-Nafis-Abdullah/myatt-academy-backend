@@ -3,8 +3,8 @@ import { useAppSelector } from "@/redux/store";
 import { notFound } from "next/navigation";
 import React from "react";
 import Loading from "../loading";
-import Header from "../../components/dashboard/Header";
-import Hero from "@/components/dashboard/Hero";
+import Header from "../../components/protected/Header";
+import Hero from "@/components/protected/Hero";
 import { Box } from "@chakra-ui/react";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
@@ -20,17 +20,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <Hero />
       <Box flexGrow={1} bg={"#F8F6F0"} px={3} py={10}>
-        <Box
-          bg={"#FFFFFF"}
-          mx={"auto"}
-          maxWidth={"8xl"}
-          px={{
-            base: 5,
-            md: 10,
-          }}
-        >
-          {children}
-        </Box>
+        {children}
       </Box>
     </Box>
   );
