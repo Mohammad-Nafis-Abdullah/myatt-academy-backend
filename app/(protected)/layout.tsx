@@ -5,6 +5,7 @@ import React from "react";
 import Loading from "../loading";
 import Header from "../../components/dashboard/Header";
 import Hero from "@/components/dashboard/Hero";
+import { Box } from "@chakra-ui/react";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const { user, status } = useAppSelector((state) => state.auth);
@@ -15,11 +16,15 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
     return notFound();
   }
   return (
-    <>
+    <Box display={"flex"} flexDirection={"column"} minHeight={"100vh"}>
       <Header />
       <Hero />
-      {children}
-    </>
+      <Box flexGrow={1} bg={"#F8F6F0"} px={3} py={10}>
+        <Box bg={"#FFFFFF"} mx={"auto"} maxWidth={"8xl"}>
+          {children}
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

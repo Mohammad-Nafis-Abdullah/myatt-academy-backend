@@ -28,7 +28,7 @@ const Hero = () => {
       <Text
         fontSize={{
           base: "xl",
-          sm: "3xl",
+          sm: "2xl",
           md: "4xl",
         }}
         color={"orangered"}
@@ -40,10 +40,14 @@ const Hero = () => {
         alignItems={"center"}
         gap={3}
       >
-        Hey, {user.name}
+        Hey, {user?.name}
         <Image
           src="https://admin.myattacademy.com/frontend/assets/img/student-profile-img/waving-hand.png"
           alt="clap"
+          boxSize={{
+            base: 5,
+            sm: 10,
+          }}
         />
       </Text>
       <Text

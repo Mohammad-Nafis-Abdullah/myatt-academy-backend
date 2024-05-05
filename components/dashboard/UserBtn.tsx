@@ -57,13 +57,18 @@ const UserBtn = () => {
           onMouseOver={() => setIsOpen(true)}
           p={0}
           fontSize={{
-            base: "36px",
+            base: "32px",
             md: "32px",
           }}
           border={"none"}
           outline={"none"}
         >
-          <Avatar name={user?.name} src={user?.image} />
+          <Avatar
+            outline={"none"}
+            boxSize={12}
+            name={user?.name}
+            src={user?.image}
+          />
         </MenuButton>
         <MenuList bg="white" color="#1a202c" p={5}>
           <MenuItem
