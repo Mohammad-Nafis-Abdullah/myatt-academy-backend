@@ -31,7 +31,10 @@ const Nav = () => {
       borderRightColor={"#F2F0EE"}
       py={10}
       px={8}
-      display={"flex"}
+      display={{
+        base: "none",
+        lg: "flex",
+      }}
       flexDirection={"column"}
       gap={5}
     >
