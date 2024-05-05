@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import React from "react";
 import UserBtn from "./UserBtn";
 import NotificationBell from "./NotificationBell";
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   return (
@@ -27,9 +28,24 @@ const Header = () => {
             md: "200px",
           }}
         />
-        <Box display={"flex"} alignItems={"center"} gap={3}>
+        <Box
+          display={{
+            base: "none",
+            md: "flex",
+          }}
+          alignItems={"center"}
+          gap={3}
+        >
           <NotificationBell />
           <UserBtn />
+        </Box>
+        <Box
+          display={{
+            base: "inline-block",
+            md: "none",
+          }}
+        >
+          <MobileMenu />
         </Box>
       </Box>
     </Box>

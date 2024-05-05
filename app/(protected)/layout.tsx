@@ -20,7 +20,15 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <Hero />
       <Box flexGrow={1} bg={"#F8F6F0"} px={3} py={10}>
-        <Box bg={"#FFFFFF"} mx={"auto"} maxWidth={"8xl"}>
+        <Box
+          bg={"#FFFFFF"}
+          mx={"auto"}
+          maxWidth={"8xl"}
+          px={{
+            base: 5,
+            md: 10,
+          }}
+        >
           {children}
         </Box>
       </Box>
