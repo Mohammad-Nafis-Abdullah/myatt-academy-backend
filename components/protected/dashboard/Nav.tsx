@@ -18,10 +18,11 @@ import { FiUpload, FiPackage } from "react-icons/fi";
 import { GrAppsRounded } from "react-icons/gr";
 import { FaUserGraduate, FaChevronDown } from "react-icons/fa";
 import _ from "lodash";
+import { IconType } from "react-icons/lib";
 
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const pathname = usePathname();
+
   return (
     <Box
       flexGrow={0}
@@ -35,61 +36,19 @@ const Nav = () => {
       gap={5}
     >
       {/* dashboard */}
-      <Link href={"/dashboard"}>
-        <Flex
-          alignItems={"start"}
-          gap={5}
-          fontSize={"xl"}
-          bg={pathname === "/dashboard" ? "theme.green" : "transparent"}
-          _hover={{
-            bgColor: "theme.green",
-          }}
-          px={5}
-          py={3}
-          borderRadius={5}
-        >
-          <Icon as={IoHomeOutline} boxSize={6} />
-          <Text>Dashboard</Text>
-        </Flex>
-      </Link>
+      <NavigationItem path="/dashboard" icon={IoHomeOutline}>
+        Dashboard
+      </NavigationItem>
 
       {/* create */}
-      <Link href={"/create"}>
-        <Flex
-          alignItems={"start"}
-          gap={5}
-          fontSize={"xl"}
-          bg={pathname === "/create" ? "theme.green" : "transparent"}
-          _hover={{
-            bgColor: "theme.green",
-          }}
-          px={5}
-          py={3}
-          borderRadius={5}
-        >
-          <Icon as={FiUpload} boxSize={6} />
-          <Text>Upload Course</Text>
-        </Flex>
-      </Link>
+      <NavigationItem path="/create" icon={FiUpload}>
+        Upload Course
+      </NavigationItem>
 
       {/* courses */}
-      <Link href={"/courses"}>
-        <Flex
-          alignItems={"start"}
-          gap={5}
-          fontSize={"xl"}
-          bg={pathname === "/courses" ? "theme.green" : "transparent"}
-          _hover={{
-            bgColor: "theme.green",
-          }}
-          px={5}
-          py={3}
-          borderRadius={5}
-        >
-          <Icon as={GrAppsRounded} boxSize={6} />
-          <Text>My Courses</Text>
-        </Flex>
-      </Link>
+      <NavigationItem path="/courses" icon={GrAppsRounded}>
+        My Courses
+      </NavigationItem>
 
       {/* grades */}
       <Menu
@@ -123,23 +82,9 @@ const Nav = () => {
       </Menu>
 
       {/* all students */}
-      <Link href={"/all-students"}>
-        <Flex
-          alignItems={"start"}
-          gap={5}
-          fontSize={"xl"}
-          bg={pathname === "/all-students" ? "theme.green" : "transparent"}
-          _hover={{
-            bgColor: "theme.green",
-          }}
-          px={5}
-          py={3}
-          borderRadius={5}
-        >
-          <Icon as={FaUserGraduate} boxSize={6} />
-          <Text>All Students</Text>
-        </Flex>
-      </Link>
+      <NavigationItem path="/all-students" icon={FaUserGraduate}>
+        All Students
+      </NavigationItem>
     </Box>
   );
 };
@@ -195,6 +140,37 @@ const GradeMenu = ({
         </CustomMenuItem>
       </MenuList>
     </Menu>
+  );
+};
+
+const NavigationItem = ({
+  path,
+  children,
+  icon,
+}: {
+  path: string;
+  children: ReactNode;
+  icon: IconType;
+}) => {
+  const pathname = usePathname();
+  return (
+    <Link href={path}>
+      <Flex
+        alignItems={"start"}
+        gap={5}
+        fontSize={"xl"}
+        bg={pathname === path ? "theme.green" : "transparent"}
+        _hover={{
+          bgColor: "theme.green",
+        }}
+        px={5}
+        py={3}
+        borderRadius={5}
+      >
+        <Icon as={icon} boxSize={6} />
+        <Text>{children}</Text>
+      </Flex>
+    </Link>
   );
 };
 
