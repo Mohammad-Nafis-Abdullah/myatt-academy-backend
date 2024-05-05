@@ -122,7 +122,7 @@ const GradeMenu = ({
       <MenuList
         onMouseEnter={onOpen}
         onMouseLeave={onClose}
-        ml={-2}
+        mx={-2}
         bg={"#F8F6F0"}
         fontSize="lg"
       >
