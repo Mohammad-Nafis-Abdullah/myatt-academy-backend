@@ -1,8 +1,7 @@
-import { Quiz } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface initialStateType {
-  quiz: Quiz | null;
+  quiz: unknown | null;
 }
 
 // Define a type for the slice state

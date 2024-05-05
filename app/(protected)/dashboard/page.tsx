@@ -1,3 +1,5 @@
+"use client";
+import DashboardOutlet from "@/components/protected/dashboard/DashboardOutlet";
 import Nav from "@/components/protected/dashboard/Nav";
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
@@ -14,9 +16,7 @@ const Dashboard = () => {
       borderRadius={10}
     >
       <Nav />
-      <Box py={10} px={8} flexGrow={1}>
-        Box 2
-      </Box>
+      <DashboardOutlet />
     </Flex>
   );
 };
