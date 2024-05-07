@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Icon, IconProps, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Icon, Text } from "@chakra-ui/react";
 import { IconType } from "react-icons/lib";
 
 export const LessInfoCard = ({
@@ -9,7 +9,7 @@ export const LessInfoCard = ({
   cardProps,
 }: {
   icon: IconType;
-  iconProps?: IconProps;
+  iconProps?: FlexProps;
   title: string;
   highlightedText?: string;
   cardProps?: FlexProps;
@@ -18,27 +18,36 @@ export const LessInfoCard = ({
     <Flex
       cursor="pointer"
       bg={"#FFFFFF"}
-      border={"1px"}
-      borderRadius={5}
+      border={"2px"}
+      borderRadius={10}
       borderColor={"#EDEDED"}
+      borderBottom={"none"}
       justifyContent={"center"}
       alignItems={"center"}
       gap={5}
       px={3}
-      py={7}
-      width={"100%"}
-      minHeight={"120px"}
-      shadow={"lg"}
+      py={10}
+      basis={"300px"}
+      grow={1}
+      shadow={"md"}
+      _hover={{
+        bg: "theme.green",
+      }}
+      _active={{
+        transform: "scale(0.98)",
+      }}
       {...cardProps}
     >
-      <Icon
-        as={icon}
+      <Flex
+        justifyContent={"center"}
+        alignItems={"center"}
         boxSize={12}
-        borderRadius={"50%"}
-        border="1px"
-        p={2}
+        borderRadius={16}
+        color={"black"}
         {...iconProps}
-      />
+      >
+        <Icon as={icon} boxSize={16} p={4} />
+      </Flex>
       <Flex flexDir={"column"}>
         <Text fontWeight={"bold"} letterSpacing={1.5} fontSize={"sm"}>
           {title}
