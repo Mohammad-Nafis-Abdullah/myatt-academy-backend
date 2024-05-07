@@ -22,6 +22,11 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 
+interface CustomEventTarget extends EventTarget {
+  blur: () => void;
+  focus: () => void;
+}
+
 interface OptionSchema {
   [key: string]: any;
 }
@@ -40,7 +45,9 @@ export const TextInput = ({
   props,
 }: {
   title: string;
-  value: (key: string) => string | number | readonly string[] | undefined;
+  value: (
+    key: string
+  ) => string | number | readonly string[] | undefined | unknown;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (
     key: string,
@@ -58,7 +65,7 @@ export const TextInput = ({
 
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
-      <Text mb="8px" fontWeight={800} fontSize={"larger"}>
+      <Text mb="8px" fontWeight={800} fontSize={"md"}>
         {title}:{" "}
         {required ? (
           <Box as="span" color={"red"}>
@@ -70,7 +77,20 @@ export const TextInput = ({
       </Text>
       <InputGroup>
         <Input
-          value={value(name)}
+          onWheel={(e) => {
+            (e.target as CustomEventTarget).blur();
+            e.stopPropagation();
+            setTimeout(() => {
+              (e.target as CustomEventTarget).focus();
+            }, 0);
+          }}
+          onKeyDownCapture={(e) => {
+            if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+              e.stopPropagation();
+              e.preventDefault();
+            }
+          }}
+          value={value(name) as string}
           onChange={(e) => {
             onChange && onChange(e);
             getValue(name, e.target.value);
@@ -80,7 +100,7 @@ export const TextInput = ({
           size="md"
           name={name}
           border={"none"}
-          bgColor={"#A9C667"}
+          bgColor={"theme.green"}
           outline={0}
           required={!!required}
           _placeholder={{
@@ -132,7 +152,7 @@ export const SelectInput = ({
   name,
   required,
   optTitleKey,
-  isLoading,
+  isLoading = false,
   props,
 }: {
   title: string;
@@ -145,7 +165,7 @@ export const SelectInput = ({
   name: string;
   required?: boolean;
   optTitleKey: keyof OptionSchema;
-  isLoading: boolean;
+  isLoading?: boolean;
   props?: MenuProps;
 }) => {
   const [current, setCurrent] = useState<OptionSchema | null>(null);
@@ -157,7 +177,7 @@ export const SelectInput = ({
 
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
-      <Text mb="8px" fontWeight={800} fontSize={"larger"}>
+      <Text mb="8px" fontWeight={800} fontSize={"md"}>
         {title}:{" "}
         {required ? (
           <Box as="span" color={"red"}>
@@ -178,7 +198,7 @@ export const SelectInput = ({
                 fontFamily={"var(--font-schoolbell)"}
                 color={"gray.600"}
                 __css={{
-                  backgroundColor: "#A9C667",
+                  backgroundColor: "theme.green",
                 }}
                 height={10}
                 borderRadius={7}
@@ -270,7 +290,7 @@ export const TextAreaInput = ({
 }) => {
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
-      <Text mb="8px" fontWeight={800} fontSize={"larger"}>
+      <Text mb="8px" fontWeight={800} fontSize={"md"}>
         {title}:{" "}
         {required ? (
           <Box as="span" color={"red"}>
@@ -291,7 +311,7 @@ export const TextAreaInput = ({
         minHeight={200}
         name={name}
         border={"none"}
-        bgColor={"#A9C667"}
+        bgColor={"theme.green"}
         borderRadius={5}
         outline={0}
         required={!!required}
@@ -342,7 +362,7 @@ export const SingleImageInput = ({
 
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
-      <Text mb="8px" fontWeight={800} fontSize={"larger"}>
+      <Text mb="8px" fontWeight={800} fontSize={"md"}>
         {title}:{" "}
         {required ? (
           <Box as="span" color={"red"}>
@@ -357,15 +377,14 @@ export const SingleImageInput = ({
         htmlFor="profile_img"
         cursor={"pointer"}
         borderRadius={5}
-        bgColor={"#A9C667"}
+        bgColor={"theme.green"}
         position={"relative"}
       >
         {value(name) ? (
           <>
             <Box
               as="img"
-              height={size}
-              width={size}
+              boxSize={size}
               objectFit={"cover"}
               src={URL.createObjectURL(value(name) as Blob | MediaSource) || ""}
               alt=""
