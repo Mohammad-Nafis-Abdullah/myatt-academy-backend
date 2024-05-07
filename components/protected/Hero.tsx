@@ -62,7 +62,14 @@ const Hero = () => {
           </BreadcrumbItem>
           <BreadcrumbItem>
             <BreadcrumbLink>
-              <Link href={pathname}>{pathname.slice(1)}</Link>
+              <Link href={pathname}>
+                <Text textTransform={"capitalize"}>
+                  {pathname
+                    .slice(1)
+                    .replaceAll("/", " / ")
+                    .replaceAll("-", " ")}
+                </Text>
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>

@@ -1,14 +1,9 @@
 import { Flex, Spinner } from "@chakra-ui/react";
-import { describe } from "node:test";
+import React from "react";
 
-export default function Loading() {
+const Loading = () => {
   return (
-    <Flex
-      width={"100%"}
-      minHeight={"100vh"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
+    <Flex grow={1} justifyContent={"center"} alignItems={"center"}>
       <Spinner
         thickness="5px"
         speed="0.65s"
@@ -18,4 +13,6 @@ export default function Loading() {
       />
     </Flex>
   );
-}
+};
+
+export default Loading;

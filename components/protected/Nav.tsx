@@ -44,12 +44,12 @@ const Nav = () => {
       </NavigationItem>
 
       {/* create */}
-      <NavigationItem path="/create" icon={FiUpload}>
+      <NavigationItem path="/upload-course" icon={FiUpload}>
         Upload Course
       </NavigationItem>
 
       {/* courses */}
-      <NavigationItem path="/courses" icon={GrAppsRounded}>
+      <NavigationItem path="/my-courses" icon={GrAppsRounded}>
         My Courses
       </NavigationItem>
 
@@ -77,7 +77,7 @@ const Nav = () => {
           {_.fill(Array(6), "*").map((val, i) => {
             return (
               <MenuItem key={i} p={0} bg={"#F8F6F0"}>
-                <GradeMenu gradeName={`Grade ${i}`} gradePath={`grade-${i}`} />
+                <GradeMenu gradeName={`Grade ${i}`} gradePath={`${i}`} />
               </MenuItem>
             );
           })}
@@ -130,15 +130,15 @@ const GradeMenu = ({
         fontSize="lg"
       >
         {/* math */}
-        <CustomMenuItem href={`/course/${gradePath}/math`}>Math</CustomMenuItem>
+        <CustomMenuItem href={`/grade/${gradePath}/math`}>Math</CustomMenuItem>
 
         {/* language arts */}
-        <CustomMenuItem href={`/course/${gradePath}/language-arts`}>
+        <CustomMenuItem href={`/grade/${gradePath}/language-arts`}>
           Language Arts
         </CustomMenuItem>
 
         {/* science */}
-        <CustomMenuItem href={`/course/${gradePath}/science`}>
+        <CustomMenuItem href={`/grade/${gradePath}/science`}>
           Science
         </CustomMenuItem>
       </MenuList>

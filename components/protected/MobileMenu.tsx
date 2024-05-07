@@ -85,12 +85,12 @@ const Navbar = () => {
       </NavigationItem>
 
       {/* create */}
-      <NavigationItem path="/create" icon={FiUpload}>
+      <NavigationItem path="/upload-course" icon={FiUpload}>
         Upload Course
       </NavigationItem>
 
       {/* courses */}
-      <NavigationItem path="/courses" icon={GrAppsRounded}>
+      <NavigationItem path="/my-courses" icon={GrAppsRounded}>
         My Courses
       </NavigationItem>
 
@@ -122,7 +122,7 @@ const Navbar = () => {
         {_.fill(Array(6), "*").map((val, i) => {
           return (
             <Box key={i} p={0} bg={"theme.green"}>
-              <GradeMenu gradeName={`Grade ${i}`} gradePath={`grade-${i}`} />
+              <GradeMenu gradeName={`Grade ${i}`} gradePath={`${i}`} />
             </Box>
           );
         })}
@@ -166,15 +166,15 @@ const GradeMenu = ({
       </MenuButton>
       <MenuList mx={-2} bg={"#F8F6F0"} fontSize="lg">
         {/* math */}
-        <CustomMenuItem href={`/course/${gradePath}/math`}>Math</CustomMenuItem>
+        <CustomMenuItem href={`/grade/${gradePath}/math`}>Math</CustomMenuItem>
 
         {/* language arts */}
-        <CustomMenuItem href={`/course/${gradePath}/language-arts`}>
+        <CustomMenuItem href={`/grade/${gradePath}/language-arts`}>
           Language Arts
         </CustomMenuItem>
 
         {/* science */}
-        <CustomMenuItem href={`/course/${gradePath}/science`}>
+        <CustomMenuItem href={`/grade/${gradePath}/science`}>
           Science
         </CustomMenuItem>
       </MenuList>
