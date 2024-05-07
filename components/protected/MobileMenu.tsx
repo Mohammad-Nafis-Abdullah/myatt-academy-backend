@@ -122,7 +122,7 @@ const Navbar = () => {
         {_.fill(Array(6), "*").map((val, i) => {
           return (
             <Box key={i} p={0} bg={"theme.green"}>
-              <GradeMenu gradeName={`Grade ${i}`} gradePath={`${i}`} />
+              <GradeMenu gradeName={`Grade ${i + 1}`} gradePath={`${i + 1}`} />
             </Box>
           );
         })}

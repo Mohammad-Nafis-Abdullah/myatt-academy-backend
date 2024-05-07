@@ -77,7 +77,10 @@ const Nav = () => {
           {_.fill(Array(6), "*").map((val, i) => {
             return (
               <MenuItem key={i} p={0} bg={"#F8F6F0"}>
-                <GradeMenu gradeName={`Grade ${i}`} gradePath={`${i}`} />
+                <GradeMenu
+                  gradeName={`Grade ${i + 1}`}
+                  gradePath={`${i + 1}`}
+                />
               </MenuItem>
             );
           })}
