@@ -1,5 +1,5 @@
 "use client";
-import CustomeStepper from "@/components/protected/upload-course/CustomeStepper";
+import CustomeStepper from "@/components/protected/upload-units/CustomeStepper";
 import {
   Box,
   Button,

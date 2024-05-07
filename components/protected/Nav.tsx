@@ -26,6 +26,7 @@ const Nav = () => {
   return (
     <Box
       flexGrow={0}
+      flexShrink={0}
       flexBasis={"300px"}
       borderRight={"2px"}
       borderRightColor={"#F2F0EE"}
@@ -44,8 +45,8 @@ const Nav = () => {
       </NavigationItem>
 
       {/* create */}
-      <NavigationItem path="/upload-course" icon={FiUpload}>
-        Upload Course
+      <NavigationItem path="/upload-units" icon={FiUpload}>
+        Upload Units
       </NavigationItem>
 
       {/* courses */}

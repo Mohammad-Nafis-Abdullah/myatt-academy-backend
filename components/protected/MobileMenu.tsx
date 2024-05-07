@@ -85,8 +85,8 @@ const Navbar = () => {
       </NavigationItem>
 
       {/* create */}
-      <NavigationItem path="/upload-course" icon={FiUpload}>
-        Upload Course
+      <NavigationItem path="/upload-units" icon={FiUpload}>
+        Upload Units
       </NavigationItem>
 
       {/* courses */}
