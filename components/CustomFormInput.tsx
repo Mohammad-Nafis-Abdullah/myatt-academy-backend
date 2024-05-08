@@ -16,11 +16,14 @@ import {
   MenuItem,
   MenuList,
   MenuProps,
+  Radio,
+  RadioGroup,
   Spinner,
+  Stack,
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface CustomEventTarget extends EventTarget {
   blur: () => void;
@@ -43,6 +46,7 @@ export const TextInput = ({
   required,
   readonly = false,
   props,
+  captionChild,
 }: {
   title: string;
   value: (
@@ -60,6 +64,7 @@ export const TextInput = ({
   required?: boolean;
   readonly?: boolean;
   props?: InputProps;
+  captionChild?: ReactNode;
 }) => {
   const [show, setShow] = useState(false);
 
@@ -75,6 +80,13 @@ export const TextInput = ({
           <></>
         )}
       </Text>
+      {captionChild ? (
+        <Box mb={2} p={2}>
+          {captionChild}
+        </Box>
+      ) : (
+        <></>
+      )}
       <InputGroup>
         <Input
           onWheel={(e) => {
@@ -449,6 +461,102 @@ export const SingleImageInput = ({
       ) : (
         <></>
       )}
+    </Box>
+  );
+};
+
+export const RadioInput = ({
+  title,
+  options,
+  // value,
+  // onChange,
+  getValue,
+  // placeholder,
+  error,
+  name,
+  required,
+  optTitleKey,
+  // isLoading = false,
+  props,
+}: {
+  title: string;
+  options: OptionSchema[];
+  // value: (key: string) => string | number | undefined;
+  // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  getValue: (key: string, value: OptionSchema | null) => any;
+  // placeholder: string;
+  error: (key: string) => string | undefined;
+  name: string;
+  required?: boolean;
+  optTitleKey: keyof OptionSchema;
+  // isLoading?: boolean;
+  props?: MenuProps;
+}) => {
+  const [value, setValue] = useState<string>("");
+  return (
+    <Box display={"flex"} flexFlow={"column nowrap"}>
+      <Text fontWeight={800} fontSize={"md"}>
+        {title}:{" "}
+        {required ? (
+          <Box as="span" color={"red"}>
+            *
+          </Box>
+        ) : (
+          <></>
+        )}
+        {/* ====================================== */}
+        <RadioGroup
+          onChange={(value) => {
+            setValue(value);
+            getValue(
+              name,
+              options.find(
+                (opt) => opt[optTitleKey] === value
+              ) as OptionSchema | null
+            );
+          }}
+          value={value}
+          fontFamily={"var(--font-schoolbell)"}
+          color={"gray.600"}
+          mt={2}
+          {...props}
+        >
+          <Stack direction="row" spacing={"30px"}>
+            {options.map((opt, i) => {
+              return (
+                <Radio
+                  key={i}
+                  value={opt[optTitleKey]}
+                  border={"2px"}
+                  borderColor={"theme.darkGreen"}
+                  // bg={"theme.green"}
+                  // color={"#4F7A28"}
+                  _checked={{
+                    bg: "theme.darkGreen",
+                  }}
+                  size={"lg"}
+                >
+                  <Text
+                    fontSize={"md"}
+                    fontWeight={"normal"}
+                    letterSpacing={"0.5px"}
+                  >
+                    {opt[optTitleKey]}
+                  </Text>
+                </Radio>
+              );
+            })}
+          </Stack>
+        </RadioGroup>
+        {/* ====================================== */}
+        {error(name) ? (
+          <Text mt="4px" color={"red"} fontSize={"small"}>
+            {error(name)}:
+          </Text>
+        ) : (
+          <></>
+        )}
+      </Text>
     </Box>
   );
 };
