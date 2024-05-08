@@ -112,51 +112,32 @@ export default function RootLayout({
           content="WmfebgIgZysd4k4gKSEVpgAHNDTvDtghE_JUgDcpKSs"
         />
         {/* FAVICONS */}
-        <link
-          rel="icon"
-          href="favicon.png"
-          // href="https://admin.myattacademy.com/frontend/assets/img/favicon-16x16.png"
-          type="image/png"
-          sizes="16x16"
-        />
-        <link
-          rel="shortcut icon"
-          href="favicon.png"
-          // href="https://admin.myattacademy.com/frontend/assets/img/favicon-16x16.png"
-          type="image/x-icon"
-        />
-        <link
-          rel="shortcut icon"
-          href="favicon.png"
-          // href="https://admin.myattacademy.com/frontend/assets/img/favicon.png"
-        />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="16x16" />
+        <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="/icon.png" />
 
         <link
           rel="apple-touch-icon-precomposed"
           type="image/x-icon"
-          // href="favicon.png"
-          href="https://admin.myattacademy.com/frontend/assets/img/apple-icon-72x72.png"
+          href="/icon.png"
           sizes="72x72"
         />
         <link
           rel="apple-touch-icon-precomposed"
           type="image/x-icon"
-          // href="favicon.png"
-          href="https://admin.myattacademy.com/frontend/assets/img/apple-icon-114x114.png"
+          href="/icon.png"
           sizes="114x114"
         />
         <link
           rel="apple-touch-icon-precomposed"
           type="image/x-icon"
-          // href="favicon.png"
-          href="https://admin.myattacademy.com/frontend/assets/img/apple-icon-144x144.png"
+          href="/icon.png"
           sizes="144x144"
         />
         <link
           rel="apple-touch-icon-precomposed"
           type="image/x-icon"
-          // href="favicon.png"
-          href="https://admin.myattacademy.com/frontend/assets/img/favicon-16x16.png"
+          href="/icon.png"
         />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`}
