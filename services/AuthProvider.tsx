@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useLayoutEffect } from "react";
 import { useLazyMeQuery } from "@/redux/features/auth/authApiSlice";
 import { useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const user = useAppSelector((state) => state.auth);
   const [me, { data }] = useLazyMeQuery();
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       try {
         const result = await me("").unwrap();

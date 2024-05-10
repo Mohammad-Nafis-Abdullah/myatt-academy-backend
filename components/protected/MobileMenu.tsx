@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { TiThMenu } from "react-icons/ti";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useRef } from "react";
 import NotificationBell from "./NotificationBell";
 import UserBtn from "./UserBtn";
 import { usePathname, useRouter } from "next/navigation";
@@ -30,7 +30,7 @@ import _ from "lodash";
 
 export default function MobileMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef(null);
+  const btnRef = useRef(null);
 
   return (
     <>

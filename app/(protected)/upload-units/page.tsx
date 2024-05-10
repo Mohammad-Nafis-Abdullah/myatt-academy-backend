@@ -214,7 +214,7 @@ const UploadCourse = () => {
               value={(key) => tag}
               error={(key) => formError[key] as string}
               captionChild={
-                Object.keys(formData["tag"] as { [key: string]: true })
+                Object.keys((formData["tag"] as { [key: string]: true }) || {})
                   ?.length ? (
                   <Flex gap={1} flexWrap={"wrap"}>
                     {Object.keys(
