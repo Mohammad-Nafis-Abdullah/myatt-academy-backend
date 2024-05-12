@@ -9,6 +9,7 @@ import {
 import CustomeStepper from "@/components/protected/upload-units/CustomeStepper";
 import {
   Box,
+  Button,
   Flex,
   Select,
   Tag,
@@ -62,9 +63,16 @@ const UploadCourse = () => {
       </Text>
 
       <Box as="form">
-        <Flex flexDirection={"column"} gap={8} alignItems={"flex-start"}>
+        <Flex
+          flexWrap={"wrap"}
+          gap={8}
+          alignItems={"flex-start"}
+          maxWidth={"700px"}
+          // border={"2px"}
+          mx={"auto"}
+        >
           {/* unit title */}
-          <Box maxWidth={"500px"} flexGrow={1} width={"100%"}>
+          <Box flexBasis={"100%"} flexShrink={1}>
             <TextInput
               required={true}
               name="title"
@@ -76,133 +84,157 @@ const UploadCourse = () => {
             />
           </Box>
 
-          {/* select grades */}
-          <SelectInput
-            required={true}
-            name="grades"
-            title="Select Grades"
-            placeholder="---"
-            getValue={(key, val) => {
-              handleFormData(key, val);
-            }}
-            error={(key) => formError[key] as string}
-            optTitleKey={"title"}
-            options={[
-              { title: "Grade 1", value: "1" },
-              { title: "Grade 2", value: "2" },
-              { title: "Grade 3", value: "3" },
-              { title: "Grade 4", value: "4" },
-              { title: "Grade 5", value: "5" },
-              { title: "Grade 6", value: "6" },
-            ]}
-          />
+          <Flex
+            flexBasis={"100%"}
+            flexShrink={1}
+            columnGap={10}
+            rowGap={5}
+            flexWrap={"wrap"}
+          >
+            {/* select grades */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <SelectInput
+                required={true}
+                name="grades"
+                title="Select Grades"
+                placeholder="---"
+                getValue={(key, val) => {
+                  handleFormData(key, val);
+                }}
+                error={(key) => formError[key] as string}
+                optTitleKey={"title"}
+                options={[
+                  { title: "Grade 1", value: "1" },
+                  { title: "Grade 2", value: "2" },
+                  { title: "Grade 3", value: "3" },
+                  { title: "Grade 4", value: "4" },
+                  { title: "Grade 5", value: "5" },
+                  { title: "Grade 6", value: "6" },
+                ]}
+              />
+            </Box>
 
-          {/* select course */}
-          <SelectInput
-            required={true}
-            name="course"
-            title="Select Course"
-            placeholder="---"
-            getValue={(key, val) => {
-              handleFormData(key, val);
-            }}
-            error={(key) => formError[key] as string}
-            optTitleKey={"title"}
-            options={[
-              { title: "Math", value: "math" },
-              { title: "Language Arts", value: "language_arts" },
-              { title: "Science", value: "science" },
-            ]}
-          />
+            {/* select course */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <SelectInput
+                required={true}
+                name="course"
+                title="Select Course"
+                placeholder="---"
+                getValue={(key, val) => {
+                  handleFormData(key, val);
+                }}
+                error={(key) => formError[key] as string}
+                optTitleKey={"title"}
+                options={[
+                  { title: "Math", value: "math" },
+                  { title: "Language Arts", value: "language_arts" },
+                  { title: "Science", value: "science" },
+                ]}
+              />
+            </Box>
+          </Flex>
 
-          {/* choose image */}
-          <SingleImageInput
-            required={true}
-            name="image"
-            title="Choose Image"
-            placeholder="Choose an image"
-            size={"200px"}
-            getValue={(key, val) => handleFormData(key, val)}
-            value={(key) => formData[key] as File | null}
-            error={(key) => formError[key] as string}
-            acceptFileType=".png, .jpeg, .jpg, .img, .webp"
-          />
+          <Flex
+            flexBasis={"100%"}
+            flexShrink={1}
+            columnGap={10}
+            rowGap={5}
+            flexWrap={"wrap"}
+          >
+            {/* status */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <RadioInput
+                required={true}
+                name="status"
+                title="Select status"
+                getValue={(key, val) => {
+                  handleFormData(key, val) as void;
+                }}
+                error={(key) => formError[key] as string}
+                options={[
+                  { title: "Active", value: true },
+                  { title: "Inactive", value: false },
+                ]}
+                optTitleKey={"title"}
+              />
+            </Box>
 
-          {/* status */}
-          <RadioInput
-            required={true}
-            name="status"
-            title="Select status"
-            getValue={(key, val) => {
-              handleFormData(key, val) as void;
-            }}
-            error={(key) => formError[key] as string}
-            options={[
-              { title: "Active", value: true },
-              { title: "Inactive", value: false },
-            ]}
-            optTitleKey={"title"}
-          />
+            {/* has story */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <RadioInput
+                required={true}
+                name="has_story"
+                title="Has Story"
+                getValue={(key, val) => {
+                  handleFormData(key, val) as void;
+                }}
+                error={(key) => formError[key] as string}
+                options={[
+                  { title: "Yes", value: true },
+                  { title: "No", value: false },
+                ]}
+                optTitleKey={"title"}
+              />
+            </Box>
 
-          {/* has story */}
-          <RadioInput
-            required={true}
-            name="has_story"
-            title="Has Story"
-            getValue={(key, val) => {
-              handleFormData(key, val) as void;
-            }}
-            error={(key) => formError[key] as string}
-            options={[
-              { title: "Yes", value: true },
-              { title: "No", value: false },
-            ]}
-            optTitleKey={"title"}
-          />
+            {/* has vocabulary */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <RadioInput
+                required={true}
+                name="has_vocabulary"
+                title="Has Vocabulary"
+                getValue={(key, val) => {
+                  handleFormData(key, val) as void;
+                }}
+                error={(key) => formError[key] as string}
+                options={[
+                  { title: "Yes", value: true },
+                  { title: "No", value: false },
+                ]}
+                optTitleKey={"title"}
+              />
+            </Box>
+          </Flex>
 
-          {/* has vocabulary */}
-          <RadioInput
-            required={true}
-            name="has_vocabulary"
-            title="Has Vocabulary"
-            getValue={(key, val) => {
-              handleFormData(key, val) as void;
-            }}
-            error={(key) => formError[key] as string}
-            options={[
-              { title: "Yes", value: true },
-              { title: "No", value: false },
-            ]}
-            optTitleKey={"title"}
-          />
+          <Flex
+            flexBasis={"100%"}
+            flexShrink={1}
+            columnGap={10}
+            rowGap={5}
+            flexWrap={"wrap"}
+          >
+            {/* price */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <TextInput
+                required={true}
+                name="price"
+                title="Price ($)"
+                type="number"
+                placeholder="Enter Price"
+                getValue={(key, value) => handleFormData(key, value)}
+                value={(key) => formData[key]}
+                error={(key) => formError[key] as string}
+              />
+            </Box>
 
-          {/* price */}
-          <TextInput
-            required={true}
-            name="price"
-            title="Price ($)"
-            type="number"
-            placeholder="Enter Price"
-            getValue={(key, value) => handleFormData(key, value)}
-            value={(key) => formData[key]}
-            error={(key) => formError[key] as string}
-          />
-
-          {/* description */}
-          <Box maxWidth={"500px"} flexGrow={1} width={"100%"}>
-            <TextAreaInput
-              required={true}
-              name="description"
-              title="Description"
-              placeholder="Write the description..."
-              getValue={(key, value) => handleFormData(key, value)}
-              value={(key) => formData[key] as string}
-              error={(key) => formError[key] as string}
-            />
-          </Box>
+            {/* order */}
+            <Box flexBasis={"200px"} flexShrink={1} flexGrow={1}>
+              <TextInput
+                required={true}
+                name="order"
+                title="Order"
+                type="number"
+                placeholder="Enter Order"
+                getValue={(key, value) => handleFormData(key, value)}
+                value={(key) => formData[key]}
+                error={(key) => formError[key] as string}
+              />
+            </Box>
+          </Flex>
 
           {/* tag */}
-          <Box maxWidth={"500px"} flexGrow={1} width={"100%"}>
+          <Box flexBasis={"100%"} flexShrink={1}>
             <TextInput
               required={true}
               name="tag"
@@ -264,17 +296,54 @@ const UploadCourse = () => {
             />
           </Box>
 
-          {/* order */}
-          <TextInput
+          {/* description */}
+          <Box flexBasis={"100%"} flexShrink={1}>
+            <TextAreaInput
+              required={true}
+              name="description"
+              title="Description"
+              placeholder="Write the description..."
+              getValue={(key, value) => handleFormData(key, value)}
+              value={(key) => formData[key] as string}
+              error={(key) => formError[key] as string}
+            />
+          </Box>
+
+          {/* choose image */}
+          <SingleImageInput
             required={true}
-            name="order"
-            title="Order"
-            type="number"
-            placeholder="Enter Order"
-            getValue={(key, value) => handleFormData(key, value)}
-            value={(key) => formData[key]}
+            name="image"
+            title="Choose Image"
+            placeholder="Choose an image"
+            size={"200px"}
+            getValue={(key, val) => handleFormData(key, val)}
+            value={(key) => formData[key] as File | null}
             error={(key) => formError[key] as string}
+            acceptFileType=".png, .jpeg, .jpg, .img, .webp"
           />
+
+          <Flex flexBasis={"100%"} justifyContent={"center"}>
+            <Button
+              borderRadius={5}
+              bg={"theme.orange"}
+              _hover={{
+                bg: "orangered",
+              }}
+              transitionDuration={"0"}
+              _active={{
+                bg: "orangered",
+                transform: "scale(0.98)",
+              }}
+              _disabled={{
+                bg: "orangered",
+                cursor: "not-allowed",
+              }}
+              isLoading={false}
+              loadingText={"Uploading..."}
+            >
+              Upload
+            </Button>
+          </Flex>
         </Flex>
       </Box>
     </Flex>
