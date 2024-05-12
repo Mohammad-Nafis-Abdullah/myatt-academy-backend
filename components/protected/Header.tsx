@@ -3,8 +3,10 @@ import React from "react";
 import UserBtn from "./UserBtn";
 import NotificationBell from "./NotificationBell";
 import MobileMenu from "./MobileMenu";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   return (
     <Box bg={"theme.yellow"}>
       <Box
@@ -26,6 +28,10 @@ const Header = () => {
           width={{
             base: "150px",
             md: "200px",
+          }}
+          cursor={"pointer"}
+          onClick={() => {
+            router.push("/");
           }}
         />
         <Box
