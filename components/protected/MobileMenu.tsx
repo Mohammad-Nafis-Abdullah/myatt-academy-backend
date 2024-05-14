@@ -15,7 +15,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { TiThMenu } from "react-icons/ti";
+import { TiThMenu, TiUpload } from "react-icons/ti";
 import React, { ReactNode, useState, useRef } from "react";
 import NotificationBell from "./NotificationBell";
 import UserBtn from "./UserBtn";
@@ -27,6 +27,7 @@ import { FiPackage, FiUpload } from "react-icons/fi";
 import { GrAppsRounded } from "react-icons/gr";
 import { IoHomeOutline } from "react-icons/io5";
 import _ from "lodash";
+import { FaUpload } from "react-icons/fa6";
 
 export default function MobileMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,9 +85,19 @@ const Navbar = () => {
         Dashboard
       </NavigationItem>
 
-      {/* create */}
+      {/* upload units */}
       <NavigationItem path="/upload-units" icon={FiUpload}>
         Upload Units
+      </NavigationItem>
+
+      {/* upload course */}
+      <NavigationItem path="/upload-course" icon={FaUpload}>
+        Upload Course
+      </NavigationItem>
+
+      {/* upload grade */}
+      <NavigationItem path="/upload-grade" icon={TiUpload}>
+        Upload Grade
       </NavigationItem>
 
       {/* courses */}

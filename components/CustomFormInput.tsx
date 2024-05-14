@@ -143,8 +143,14 @@ export const TextInput = ({
         )}
       </InputGroup>
       {error(name) ? (
-        <Text mt="4px" color={"red"} fontSize={"small"}>
-          {error(name)}:
+        <Text
+          mt="4px"
+          color={"red"}
+          fontSize={"small"}
+          fontWeight={"bold"}
+          letterSpacing={1}
+        >
+          {error(name)}
         </Text>
       ) : (
         <></>
@@ -273,8 +279,14 @@ export const SelectInput = ({
       </Menu>
       {/* ====================================== */}
       {error(name) ? (
-        <Text mt="4px" color={"red"} fontSize={"small"}>
-          {error(name)}:
+        <Text
+          mt="4px"
+          color={"red"}
+          fontSize={"small"}
+          fontWeight={"bold"}
+          letterSpacing={1}
+        >
+          {error(name)}
         </Text>
       ) : (
         <></>
@@ -342,8 +354,14 @@ export const TextAreaInput = ({
         {...props}
       />
       {error(name) ? (
-        <Text mt="4px" color={"red"} fontSize={"small"}>
-          {error(name)}:
+        <Text
+          mt="4px"
+          color={"red"}
+          fontSize={"small"}
+          fontWeight={"bold"}
+          letterSpacing={1}
+        >
+          {error(name)}
         </Text>
       ) : (
         <></>
@@ -381,7 +399,7 @@ export const SingleImageInput = ({
 
   useEffect(() => {
     if (!value(name) && profile_img_REF.current) {
-      profile_img_REF.current.files = null;
+      profile_img_REF.current.value = "";
     }
   }, [value, profile_img_REF]);
 
@@ -468,8 +486,14 @@ export const SingleImageInput = ({
         />
       </Box>
       {error(name) ? (
-        <Text mt="4px" color={"red"} fontSize={"small"}>
-          {error(name)}:
+        <Text
+          mt="4px"
+          color={"red"}
+          fontSize={"small"}
+          fontWeight={"bold"}
+          letterSpacing={1}
+        >
+          {error(name)}
         </Text>
       ) : (
         <></>
@@ -570,8 +594,14 @@ export const RadioInput = ({
         </RadioGroup>
         {/* ====================================== */}
         {error(name) ? (
-          <Text mt="4px" color={"red"} fontSize={"small"}>
-            {error(name)}:
+          <Text
+            mt="4px"
+            color={"red"}
+            fontSize={"small"}
+            fontWeight={"bold"}
+            letterSpacing={1}
+          >
+            {error(name)}
           </Text>
         ) : (
           <></>

@@ -17,6 +17,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { FiUpload, FiPackage } from "react-icons/fi";
 import { GrAppsRounded } from "react-icons/gr";
 import { FaUserGraduate, FaChevronDown } from "react-icons/fa";
+import { FaUpload } from "react-icons/fa6";
+import { TiUpload } from "react-icons/ti";
 import _ from "lodash";
 import { IconType } from "react-icons/lib";
 
@@ -44,9 +46,19 @@ const Nav = () => {
         Dashboard
       </NavigationItem>
 
-      {/* create */}
+      {/* upload units */}
       <NavigationItem path="/upload-units" icon={FiUpload}>
         Upload Units
+      </NavigationItem>
+
+      {/* upload course */}
+      <NavigationItem path="/upload-course" icon={FaUpload}>
+        Upload Course
+      </NavigationItem>
+
+      {/* upload grade */}
+      <NavigationItem path="/upload-grade" icon={TiUpload}>
+        Upload Grade
       </NavigationItem>
 
       {/* courses */}

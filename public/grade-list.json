@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "66433c883e1522def6d08912",
+    "image": "/sun.png",
+    "name": "Grade 1",
+    "feature": false,
+    "total_courses": 45,
+    "total_units": 49,
+    "status": "Public"
+  },
+  {
+    "_id": "66433c884313a6100a7f8967",
+    "image": "/icon.png",
+    "name": "Grade 2",
+    "feature": true,
+    "total_courses": 21,
+    "total_units": 12,
+    "status": "Public"
+  },
+  {
+    "_id": "66433c884581e1ba2e0e7f61",
+    "image": "/sun.png",
+    "name": "Grade 3",
+    "feature": false,
+    "total_courses": 31,
+    "total_units": 21,
+    "status": "Public"
+  },
+  {
+    "_id": "66433c8801e32ad5f826466b",
+    "image": "/icon.png",
+    "name": "Grade 4",
+    "feature": true,
+    "total_courses": 9,
+    "total_units": 1,
+    "status": "Public"
+  },
+  {
+    "_id": "66433c889afad5b1417f4b17",
+    "image": "/sun.png",
+    "name": "Grade 5",
+    "feature": false,
+    "total_courses": 14,
+    "total_units": 43,
+    "status": "Public"
+  },
+  {
+    "_id": "66433c880d71cbd586bbcbee",
+    "image": "/icon.png",
+    "name": "Grade 6",
+    "feature": true,
+    "total_courses": 42,
+    "total_units": 47,
+    "status": "Public"
+  }
+]

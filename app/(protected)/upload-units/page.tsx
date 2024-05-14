@@ -48,8 +48,7 @@ const steps = [
   { title: "Submit Process" },
 ];
 
-const UploadCourse = () => {
-  const router = useRouter();
+const UploadUnit = () => {
   // const { activeStep, setActiveStep, goToNext, goToPrevious } = useSteps({index: 0, count: steps.length});
   const [formData, setFormData] = useState<form_schema>({} as form_schema);
   const [formError, setFormError] = useState<{ [key in form_key]: string }>(
@@ -433,4 +432,4 @@ const UploadCourse = () => {
   );
 };
 
-export default UploadCourse;
+export default UploadUnit;
