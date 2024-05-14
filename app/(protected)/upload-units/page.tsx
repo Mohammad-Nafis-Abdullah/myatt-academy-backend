@@ -114,6 +114,7 @@ const UploadCourse = () => {
     data.title = formData.title;
     console.log(data);
     setFormData({} as form_schema);
+    setFormError({} as { [key in form_key]: string });
   };
 
   return (
