@@ -83,6 +83,7 @@ const GradeListTable = () => {
                         alignItems={"center"}
                         pt={1.5}
                         letterSpacing={1.5}
+                        borderRadius={5}
                       >
                         Yes
                       </Badge>
@@ -98,6 +99,7 @@ const GradeListTable = () => {
                         alignItems={"center"}
                         pt={1.5}
                         letterSpacing={1.5}
+                        borderRadius={5}
                       >
                         No
                       </Badge>
@@ -117,6 +119,7 @@ const GradeListTable = () => {
                       alignItems={"center"}
                       pt={1.2}
                       letterSpacing={1.5}
+                      borderRadius={5}
                     >
                       {grade.status}
                     </Badge>
