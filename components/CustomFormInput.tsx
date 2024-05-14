@@ -156,7 +156,7 @@ export const TextInput = ({
 export const SelectInput = ({
   title,
   options,
-  // value,
+  value,
   // onChange,
   getValue,
   placeholder,
@@ -169,7 +169,7 @@ export const SelectInput = ({
 }: {
   title: string;
   options: OptionSchema[];
-  // value: (key: string) => string | number | undefined;
+  value?: string | number | undefined | null | object;
   // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: OptionSchema | null) => any;
   placeholder: string;
@@ -186,6 +186,13 @@ export const SelectInput = ({
   useEffect(() => {
     getValue(name, current);
   }, [name, current]);
+
+  useEffect(() => {
+    if (!value) {
+      setCurrent(null);
+      setCurrentIndex(null);
+    }
+  }, [value]);
 
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
@@ -372,6 +379,12 @@ export const SingleImageInput = ({
 }) => {
   const profile_img_REF = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (!value(name) && profile_img_REF.current) {
+      profile_img_REF.current.files = null;
+    }
+  }, [value, profile_img_REF]);
+
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
       <Text mb="8px" fontWeight={800} fontSize={"md"}>
@@ -413,7 +426,7 @@ export const SingleImageInput = ({
               onClick={(e) => {
                 e.preventDefault();
                 if (profile_img_REF?.current) {
-                  profile_img_REF.current.value = "";
+                  profile_img_REF.current.files = null;
                 }
                 getValue(name, null);
               }}
@@ -468,7 +481,7 @@ export const SingleImageInput = ({
 export const RadioInput = ({
   title,
   options,
-  // value,
+  value,
   // onChange,
   getValue,
   // placeholder,
@@ -481,7 +494,7 @@ export const RadioInput = ({
 }: {
   title: string;
   options: OptionSchema[];
-  // value: (key: string) => string | number | undefined;
+  value?: string | number | undefined | null | object;
   // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: OptionSchema | null) => any;
   // placeholder: string;
@@ -492,7 +505,14 @@ export const RadioInput = ({
   // isLoading?: boolean;
   props?: MenuProps;
 }) => {
-  const [value, setValue] = useState<string>("");
+  const [_value, setValue] = useState<string>("");
+
+  useEffect(() => {
+    if (!value) {
+      setValue("");
+    }
+  }, [value]);
+
   return (
     <Box display={"flex"} flexFlow={"column nowrap"}>
       <Text fontWeight={800} fontSize={"md"}>
@@ -515,7 +535,7 @@ export const RadioInput = ({
               ) as OptionSchema | null
             );
           }}
-          value={value}
+          value={_value}
           fontFamily={"var(--font-schoolbell)"}
           color={"gray.600"}
           mt={2}

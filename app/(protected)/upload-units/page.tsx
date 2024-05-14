@@ -18,7 +18,29 @@ import {
   Text,
 } from "@chakra-ui/react";
 import _ from "lodash";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+
+interface selection_field_schema<T> {
+  title: string;
+  value: T;
+}
+
+interface form_schema {
+  course: selection_field_schema<string>;
+  description: string;
+  grades: selection_field_schema<string>;
+  has_story: selection_field_schema<boolean>;
+  has_vocabulary: selection_field_schema<boolean>;
+  image: File;
+  order: string;
+  price: string;
+  status: selection_field_schema<boolean>;
+  tag: { [key: string]: boolean };
+  title: string;
+}
+
+type form_key = keyof form_schema;
 
 const steps = [
   { title: "Unit Overview" },
@@ -27,9 +49,12 @@ const steps = [
 ];
 
 const UploadCourse = () => {
+  const router = useRouter();
   // const { activeStep, setActiveStep, goToNext, goToPrevious } = useSteps({index: 0, count: steps.length});
-  const [formData, setFormData] = useState<{ [key: string]: unknown }>({});
-  const [formError, setFormError] = useState<{ [key: string]: unknown }>({});
+  const [formData, setFormData] = useState<form_schema>({} as form_schema);
+  const [formError, setFormError] = useState<{ [key in form_key]: string }>(
+    {} as { [key in form_key]: string }
+  );
 
   const [tag, setTag] = useState("");
 
@@ -38,6 +63,57 @@ const UploadCourse = () => {
       ...prev,
       [key]: val,
     }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    let errorCount = 0;
+    // console.log(formData);
+    const error: { [key in form_key]: string } = {
+      course: "",
+      description: "",
+      grades: "",
+      has_story: "",
+      has_vocabulary: "",
+      image: "",
+      order: "",
+      price: "",
+      status: "",
+      tag: "",
+      title: "",
+    };
+    // console.log(error);
+    for (const key in error) {
+      if (!Object.keys(formData["tag"] || {}).length) {
+        error[key as form_key] = "This is require field";
+        errorCount++;
+      } else if (!formData[key as form_key]) {
+        error[key as form_key] = "This is require field";
+        errorCount++;
+      }
+    }
+
+    if (errorCount) {
+      setFormError(error);
+      return;
+    }
+
+    const data: { [key in form_key]: unknown } = {} as {
+      [key in form_key]: unknown;
+    };
+    data.course = formData.course?.value;
+    data.description = formData.description;
+    data.grades = formData.grades?.value;
+    data.has_story = formData.has_story?.value;
+    data.has_vocabulary = formData.has_vocabulary?.value;
+    data.image = formData.image;
+    data.order = formData.order;
+    data.price = formData.price;
+    data.status = formData.status?.value;
+    data.tag = Object.keys(formData?.tag || {});
+    data.title = formData.title;
+    console.log(data);
+    setFormData({} as form_schema);
   };
 
   return (
@@ -79,8 +155,8 @@ const UploadCourse = () => {
               title="Unit Title"
               placeholder="Enter the unit title"
               getValue={(key, value) => handleFormData(key, value)}
-              value={(key) => formData[key]}
-              error={(key) => formError[key] as string}
+              value={(key) => formData[key as form_key] || ""}
+              error={(key) => formError[key as form_key]}
             />
           </Box>
 
@@ -98,10 +174,11 @@ const UploadCourse = () => {
                 name="grades"
                 title="Select Grades"
                 placeholder="---"
+                value={formData.grades}
                 getValue={(key, val) => {
                   handleFormData(key, val);
                 }}
-                error={(key) => formError[key] as string}
+                error={(key) => formError[key as form_key]}
                 optTitleKey={"title"}
                 options={[
                   { title: "Grade 1", value: "1" },
@@ -121,10 +198,11 @@ const UploadCourse = () => {
                 name="course"
                 title="Select Course"
                 placeholder="---"
+                value={formData.course}
                 getValue={(key, val) => {
                   handleFormData(key, val);
                 }}
-                error={(key) => formError[key] as string}
+                error={(key) => formError[key as form_key]}
                 optTitleKey={"title"}
                 options={[
                   { title: "Math", value: "math" },
@@ -148,10 +226,11 @@ const UploadCourse = () => {
                 required={true}
                 name="status"
                 title="Select status"
+                value={formData.status}
                 getValue={(key, val) => {
                   handleFormData(key, val) as void;
                 }}
-                error={(key) => formError[key] as string}
+                error={(key) => formError[key as form_key]}
                 options={[
                   { title: "Active", value: true },
                   { title: "Inactive", value: false },
@@ -166,10 +245,11 @@ const UploadCourse = () => {
                 required={true}
                 name="has_story"
                 title="Has Story"
+                value={formData.has_story}
                 getValue={(key, val) => {
                   handleFormData(key, val) as void;
                 }}
-                error={(key) => formError[key] as string}
+                error={(key) => formError[key as form_key]}
                 options={[
                   { title: "Yes", value: true },
                   { title: "No", value: false },
@@ -184,10 +264,11 @@ const UploadCourse = () => {
                 required={true}
                 name="has_vocabulary"
                 title="Has Vocabulary"
+                value={formData.has_vocabulary}
                 getValue={(key, val) => {
                   handleFormData(key, val) as void;
                 }}
-                error={(key) => formError[key] as string}
+                error={(key) => formError[key as form_key]}
                 options={[
                   { title: "Yes", value: true },
                   { title: "No", value: false },
@@ -213,8 +294,8 @@ const UploadCourse = () => {
                 type="number"
                 placeholder="Enter Price"
                 getValue={(key, value) => handleFormData(key, value)}
-                value={(key) => formData[key]}
-                error={(key) => formError[key] as string}
+                value={(key) => formData[key as form_key] || ""}
+                error={(key) => formError[key as form_key]}
               />
             </Box>
 
@@ -227,8 +308,8 @@ const UploadCourse = () => {
                 type="number"
                 placeholder="Enter Order"
                 getValue={(key, value) => handleFormData(key, value)}
-                value={(key) => formData[key]}
-                error={(key) => formError[key] as string}
+                value={(key) => formData[key as form_key] || ""}
+                error={(key) => formError[key as form_key]}
               />
             </Box>
           </Flex>
@@ -244,7 +325,7 @@ const UploadCourse = () => {
                 setTag(value as string);
               }}
               value={(key) => tag}
-              error={(key) => formError[key] as string}
+              error={(key) => formError[key as form_key]}
               captionChild={
                 Object.keys((formData["tag"] as { [key: string]: true }) || {})
                   ?.length ? (
@@ -304,8 +385,8 @@ const UploadCourse = () => {
               title="Description"
               placeholder="Write the description..."
               getValue={(key, value) => handleFormData(key, value)}
-              value={(key) => formData[key] as string}
-              error={(key) => formError[key] as string}
+              value={(key) => (formData[key as form_key] as string) || ""}
+              error={(key) => formError[key as form_key]}
             />
           </Box>
 
@@ -317,13 +398,14 @@ const UploadCourse = () => {
             placeholder="Choose an image"
             size={"200px"}
             getValue={(key, val) => handleFormData(key, val)}
-            value={(key) => formData[key] as File | null}
-            error={(key) => formError[key] as string}
+            value={(key) => formData[key as form_key] as File | null}
+            error={(key) => formError[key as form_key]}
             acceptFileType=".png, .jpeg, .jpg, .img, .webp"
           />
 
           <Flex flexBasis={"100%"} justifyContent={"center"}>
             <Button
+              onClick={handleSubmit}
               borderRadius={5}
               bg={"theme.orange"}
               _hover={{
