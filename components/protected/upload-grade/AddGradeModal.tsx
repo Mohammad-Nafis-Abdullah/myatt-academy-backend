@@ -17,8 +17,11 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
+import { useLocalStorage } from "react-use";
+import { grade_schema } from "./GradeListTable";
 
 interface selection_field_schema<T> {
   title: string;
@@ -28,18 +31,41 @@ interface selection_field_schema<T> {
 interface form_schema {
   name: string;
   feature: selection_field_schema<boolean>;
-  image: File | null;
+  image: File | null | string;
   show_publicly: selection_field_schema<boolean>;
 }
 
 type form_key = keyof form_schema;
 
 const AddGradeModal = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [state, setState] = useLocalStorage<grade_schema | null>(
+    "grade_modal_state",
+    null
+  );
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isOpen, onOpen, onClose } = useDisclosure({
+    onClose() {
+      router.push(pathname);
+      setState(null);
+    },
+  });
+  const searchParams = useSearchParams();
+
+  // modal open and close according to search param
+  useEffect(() => {
+    const param = searchParams.get("modal");
+    if (param === "grade_modal") {
+      onOpen();
+    } else {
+      onClose();
+    }
+  }, [searchParams, onOpen, onClose]);
+
   return (
     <Box>
       <Button
-        onClick={onOpen}
+        onClick={() => router.push("?modal=grade_modal")}
         size={"xs"}
         _active={{ bg: "", transform: "scale(0.98)" }}
       >
@@ -54,7 +80,7 @@ const AddGradeModal = () => {
           <ModalHeader>Add New Grade</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddGradeForm />
+            <AddGradeForm onClose={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -64,11 +90,31 @@ const AddGradeModal = () => {
 
 export default AddGradeModal;
 
-const AddGradeForm = () => {
+const AddGradeForm = ({ onClose }: { onClose: () => void }) => {
+  const [state] = useLocalStorage<grade_schema | null>(
+    "grade_modal_state",
+    null
+  );
   const [formData, setFormData] = useState<form_schema>({} as form_schema);
   const [formError, setFormError] = useState<{ [key in form_key]: string }>(
     {} as { [key in form_key]: string }
   );
+
+  useEffect(() => {
+    if (state) {
+      setFormData({
+        name: state.name,
+        feature: state.feature
+          ? { title: "Yes", value: true }
+          : { title: "No", value: false },
+        image: state.image,
+        show_publicly:
+          state.status === "Public"
+            ? { title: "Yes", value: true }
+            : { title: "No", value: false },
+      });
+    }
+  }, [state]);
 
   const handleFormData = (key: string, val: unknown) => {
     setFormData((prev) => ({
@@ -111,6 +157,7 @@ const AddGradeForm = () => {
     console.log(data);
     setFormData({} as form_schema);
     setFormError({} as { [key in form_key]: string });
+    onClose();
   };
 
   return (

@@ -384,7 +384,7 @@ export const SingleImageInput = ({
   ...props
 }: {
   title: string;
-  value: (key: string) => File | null;
+  value: (key: string) => File | null | string;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: File | undefined | null) => void;
   placeholder: string;
@@ -429,7 +429,13 @@ export const SingleImageInput = ({
               as="img"
               boxSize={size}
               objectFit={"cover"}
-              src={URL.createObjectURL(value(name) as Blob | MediaSource) || ""}
+              src={
+                value(name)
+                  ? typeof value(name) === "string"
+                    ? (value(name) as string)
+                    : URL.createObjectURL(value(name) as Blob | MediaSource)
+                  : ""
+              }
               alt=""
             />
             <Icon
@@ -518,7 +524,7 @@ export const RadioInput = ({
 }: {
   title: string;
   options: OptionSchema[];
-  value?: string | number | undefined | null | object;
+  value?: null | object;
   // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: OptionSchema | null) => any;
   // placeholder: string;
@@ -532,7 +538,9 @@ export const RadioInput = ({
   const [_value, setValue] = useState<string>("");
 
   useEffect(() => {
-    if (!value) {
+    if (value) {
+      setValue((value as { [key: string]: string })[optTitleKey]);
+    } else {
       setValue("");
     }
   }, [value]);

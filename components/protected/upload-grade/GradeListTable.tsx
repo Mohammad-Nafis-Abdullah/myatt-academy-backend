@@ -15,8 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import React, { ReactNode, useEffect, useState } from "react";
+import { useLocalStorage } from "react-use";
+import { useRouter } from "next/navigation";
 
-interface grade_schema {
+export interface grade_schema {
   _id: string;
   image: string;
   name: string;
@@ -28,6 +30,11 @@ interface grade_schema {
 
 const GradeListTable = () => {
   const [grades, setGrades] = useState<grade_schema[]>([]);
+  const [state, setState] = useLocalStorage<grade_schema | null>(
+    "grade_modal_state",
+    null
+  );
+  const router = useRouter();
 
   useEffect(() => {
     fetch("/grade-list.json")
@@ -133,6 +140,10 @@ const GradeListTable = () => {
                         color={"gray"}
                         _hover={{ color: "black" }}
                         _active={{ transform: "scale(0.9)" }}
+                        onClick={() => {
+                          setState(grade);
+                          router.push("?modal=grade_modal");
+                        }}
                       />
                       <Icon
                         as={FaTrash}
