@@ -1,0 +1,68 @@
+[
+  {
+    "_id": "6645129d2186e699157f889a",
+    "image": "/icon.png",
+    "name": "Math",
+    "category": "Grade 4",
+    "total_units": 9,
+    "price": 50,
+    "status": "Public",
+    "story": true,
+    "vocabulary": true
+  },
+  {
+    "_id": "6645129d8146906463ca3cf4",
+    "image": "/icon.png",
+    "name": "Language Arts",
+    "category": "Grade 2",
+    "total_units": 1,
+    "price": 50,
+    "status": "Hidden",
+    "story": true,
+    "vocabulary": false
+  },
+  {
+    "_id": "6645129d9a1d395e1625a7e5",
+    "image": "/sun.png",
+    "name": "Math",
+    "category": "Grade 1",
+    "total_units": 38,
+    "price": 50,
+    "status": "Public",
+    "story": true,
+    "vocabulary": true
+  },
+  {
+    "_id": "6645129da202716cbdf8cf8f",
+    "image": "/icon.png",
+    "name": "Language Arts",
+    "category": "Grade 3",
+    "total_units": 4,
+    "price": 50,
+    "status": "Public",
+    "story": true,
+    "vocabulary": false
+  },
+  {
+    "_id": "6645129d8606aa6fda7cadd3",
+    "image": "/sun.png",
+    "name": "Language Arts",
+    "category": "Grade 5",
+    "total_units": 7,
+    "price": 50,
+    "status": "Public",
+    "story": false,
+    "vocabulary": true
+  },
+  {
+    "_id": "6645129d9b25173556d21172",
+    "image": "/sun.png",
+    "name": "Math",
+    "category": "Grade 6",
+    "total_units": 41,
+    "price": 50,
+    "status": "Hidden",
+    "story": false,
+    "vocabulary": false
+  }
+]

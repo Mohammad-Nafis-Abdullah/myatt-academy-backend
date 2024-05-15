@@ -175,7 +175,7 @@ export const SelectInput = ({
 }: {
   title: string;
   options: OptionSchema[];
-  value?: string | number | undefined | null | object;
+  value?: OptionSchema;
   // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: OptionSchema | null) => any;
   placeholder: string;
@@ -194,7 +194,13 @@ export const SelectInput = ({
   }, [name, current]);
 
   useEffect(() => {
-    if (!value) {
+    if (value) {
+      const index = options.findIndex(
+        (opt) => opt[optTitleKey] === value[optTitleKey]
+      );
+      setCurrent(value);
+      setCurrentIndex(index);
+    } else {
       setCurrent(null);
       setCurrentIndex(null);
     }
@@ -524,7 +530,7 @@ export const RadioInput = ({
 }: {
   title: string;
   options: OptionSchema[];
-  value?: null | object;
+  value?: OptionSchema;
   // onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   getValue: (key: string, value: OptionSchema | null) => any;
   // placeholder: string;
@@ -539,7 +545,7 @@ export const RadioInput = ({
 
   useEffect(() => {
     if (value) {
-      setValue((value as { [key: string]: string })[optTitleKey]);
+      setValue(value[optTitleKey]);
     } else {
       setValue("");
     }

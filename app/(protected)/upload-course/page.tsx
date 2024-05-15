@@ -1,5 +1,7 @@
 "use client";
-import { Flex } from "@chakra-ui/react";
+import AddCourseModal from "@/components/protected/upload-course/AddCourseModal";
+import CourseListTable from "@/components/protected/upload-course/CourseListTable";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 const UploadCourse = () => {
@@ -11,8 +13,17 @@ const UploadCourse = () => {
       px={5}
       py={10}
       gap={10}
+      overflow={"hidden"}
     >
-      upload course
+      <Flex justifyContent={"space-between"} alignItems={"center"}>
+        <Text fontSize={"2xl"} fontWeight={"bold"} letterSpacing={1}>
+          Course
+        </Text>
+        <AddCourseModal />
+      </Flex>
+      <Box overflow={"auto"} width={"100%"}>
+        <CourseListTable />
+      </Box>
     </Flex>
   );
 };
