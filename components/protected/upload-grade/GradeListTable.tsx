@@ -30,6 +30,8 @@ export interface grade_schema {
 
 const GradeListTable = () => {
   const [grades, setGrades] = useState<grade_schema[]>([]);
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState<grade_schema[]>([]);
   const [state, setState] = useLocalStorage<grade_schema | null>(
     "grade_modal_state",
     null
@@ -42,13 +44,36 @@ const GradeListTable = () => {
       .then((data) => setGrades(data));
   }, []);
 
+  useEffect(() => {
+    let searchTimeOut_ref: any = null;
+    if (search) {
+      searchTimeOut_ref && clearTimeout(searchTimeOut_ref);
+
+      searchTimeOut_ref = setTimeout(() => {
+        const selected = grades.filter((grade) => {
+          return grade.name.toLowerCase().includes(search.toLowerCase());
+        });
+        setFilteredData(selected);
+        searchTimeOut_ref = null;
+      }, 500);
+    } else {
+      setFilteredData(grades);
+    }
+
+    return () => clearTimeout(searchTimeOut_ref);
+  }, [search, grades]);
+
   return (
     <>
       <Flex maxWidth={"300px"} alignItems={"center"} gap={2} mb={5} p={1}>
         <Text fontWeight={"bold"} whiteSpace={"pre"} letterSpacing={1}>
           Search :
         </Text>
-        <Input placeholder="Enter name to search..." />
+        <Input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Enter name to search..."
+        />
       </Flex>
       <TableContainer userSelect={"none"}>
         <Table variant="striped" colorScheme="gray">
@@ -64,7 +89,7 @@ const GradeListTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {grades.map((grade) => {
+            {filteredData.map((grade) => {
               return (
                 <Tr key={grade._id}>
                   <Td>
